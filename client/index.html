@@ -10,10 +10,41 @@
 
     <!-- Templates -->
     <script type="text/ng-template" id="angular-material.tpl">
-        <div>
-            <md-button ng-click="vm.showSimpleToast()">
-                Show Simple
-            </md-button>
+        <div layout="column">
+            <div flex>
+                <md-button class="md-raised md-primary" ng-click="vm.showSimpleToast()">
+                    Show Simple
+                </md-button>
+            </div>
+            <div flex>
+                <md-autocomplete
+                    ng-disabled="false"
+                    md-no-cache="true"
+                    md-selected-item="null"
+                    md-search-text-change="vm.searchTextChange(vm.searchText)"
+                    md-search-text="Search"
+                    md-selected-item-change="vm.selectedItemChange(item)"
+                    md-items="item in vm.querySearch(ctrl.searchText)"
+                    md-item-text="item.name"
+                    md-min-length="0"
+                    placeholder="Pick an Angular repository"
+                    md-menu-class="autocomplete-custom-template">
+                    <md-item-template>
+                      <span class="item-title">
+                        <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                        <span> {{item.name}} </span>
+                      </span>
+                      <span class="item-metadata">
+                        <span class="item-metastat">
+                          <strong>{{item.watchers}}</strong> watchers
+                        </span>
+                        <span class="item-metastat">
+                          <strong>{{item.forks}}</strong> forks
+                        </span>
+                      </span>
+                    </md-item-template>
+                </md-autocomplete>
+            </div>
         </div>
     </script>
 
