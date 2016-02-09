@@ -13,7 +13,7 @@ function MaterialAngularCtrl($mdToast) {
         $mdToast.show(
             $mdToast.simple()
                 .textContent('Simple Toast!')
-                .position('top right')
+                .position('bottom left')
                 .hideDelay(3000)
         );
     }
