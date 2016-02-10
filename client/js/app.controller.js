@@ -1,12 +1,13 @@
 import angular from 'angular';
-import GridBottomSheetCtrl from './material-angular/grid-bottom-sheet.controller.js'
+import GridBottomSheetCtrl from './material-angular/grid-bottom-sheet.controller.js';
+import DialogController from './material-angular/dialog.controller.js';
 
 var app = angular.module('app');
 app.controller('MaterialAngularCtrl', MaterialAngularCtrl);
 
-MaterialAngularCtrl.$inject = ['$mdToast', '$log', '$q', '$timeout', '$mdBottomSheet'];
+MaterialAngularCtrl.$inject = ['$mdToast', '$log', '$q', '$timeout', '$mdBottomSheet', '$mdDialog'];
 
-function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet) {
+function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet, $mdDialog) {
 
     var vm = this;
     /* Toast */
@@ -28,6 +29,9 @@ function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet) {
         { name: 'Twitter', icon: 'twitter' }
     ];
     vm.showGridBottomSheet = showGridBottomSheet;
+
+    /* Dialog */
+    vm.showTabDialog = showTabDialog;
 
     function showSimpleToast() {
         $mdToast.show(
@@ -117,6 +121,21 @@ function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet) {
                     .position('top right')
                     .hideDelay(1500)
             );
+        });
+    }
+
+    function showTabDialog(ev) {
+        $mdDialog.show({
+            controller: 'DialogController',
+            controllerAs: 'vm',
+            templateUrl: 'tabDialog.tpl',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true
+        }).then(function(answer) {
+            $log.info('You said the information was "' + answer + '".');
+        }, function() {
+            $log.info('You cancelled the dialog.');
         });
     }
 
