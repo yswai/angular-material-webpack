@@ -4,7 +4,8 @@ import ngRoute from 'angular-route';
 
 var app = angular.module('app', ['ngMaterial', 'ngRoute']);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$mdIconProvider', function($routeProvider, $mdIconProvider) {
+    $mdIconProvider.fontSet('fa', 'fontawesome');
     $routeProvider.when('/', {
         templateUrl: 'angular-material.tpl',
         controller: 'MaterialAngularCtrl',
