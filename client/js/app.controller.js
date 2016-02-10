@@ -3,9 +3,9 @@ import angular from 'angular';
 var app = angular.module('app');
 app.controller('MaterialAngularCtrl', MaterialAngularCtrl);
 
-MaterialAngularCtrl.$inject = ['$mdToast', '$log'];
+MaterialAngularCtrl.$inject = ['$mdToast', '$log', '$q', '$timeout'];
 
-function MaterialAngularCtrl($mdToast, $log) {
+function MaterialAngularCtrl($mdToast, $log, $q, $timeout) {
 
     var vm = this;
     vm.showSimpleToast = showSimpleToast;
@@ -25,7 +25,11 @@ function MaterialAngularCtrl($mdToast, $log) {
 
     function querySearch(query) {
         var results = query ? vm.repos.filter( createFilterFor(query) ) : vm.repos;
-        return results;
+        var deferred = $q.defer();
+        $timeout(function() {
+            deferred.resolve(results);
+        }, 1000);
+        return deferred.promise;
     }
     function searchTextChange(text) {
         $log.info('Text changed to ' + text);
