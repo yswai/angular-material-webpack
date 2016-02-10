@@ -1,18 +1,33 @@
 import angular from 'angular';
+import GridBottomSheetCtrl from './material-angular/grid-bottom-sheet.controller.js'
 
 var app = angular.module('app');
 app.controller('MaterialAngularCtrl', MaterialAngularCtrl);
 
-MaterialAngularCtrl.$inject = ['$mdToast', '$log', '$q', '$timeout'];
+MaterialAngularCtrl.$inject = ['$mdToast', '$log', '$q', '$timeout', '$mdBottomSheet'];
 
-function MaterialAngularCtrl($mdToast, $log, $q, $timeout) {
+function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet) {
 
     var vm = this;
+    /* Toast */
     vm.showSimpleToast = showSimpleToast;
+
+    /* Autocomplete */
     vm.repos = loadAll();
     vm.querySearch = querySearch;
     vm.selectedItemChange = selectedItemChange;
     vm.searchTextChange = searchTextChange;
+
+    /* Bottom Grid */
+    vm.bottomGridItems = [
+        { name: 'Hangout', icon: 'hangout' },
+        { name: 'Mail', icon: 'mail' },
+        { name: 'Message', icon: 'message' },
+        { name: 'Copy', icon: 'copy2' },
+        { name: 'Facebook', icon: 'facebook' },
+        { name: 'Twitter', icon: 'twitter' }
+    ];
+    vm.showGridBottomSheet = showGridBottomSheet;
 
     function showSimpleToast() {
         $mdToast.show(
@@ -86,6 +101,23 @@ function MaterialAngularCtrl($mdToast, $log, $q, $timeout) {
         return function filterFn(item) {
             return (item.value.indexOf(lowercaseQuery) === 0);
         };
+    }
+
+    function showGridBottomSheet() {
+        vm.alert = '';
+        $mdBottomSheet.show({
+            templateUrl: 'bottom-sheet-grid-template.tpl',
+            controller: 'GridBottomSheetCtrl',
+            controllerAs: 'vm',
+            clickOutsideToClose: false
+        }).then(function(clickedItem) {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent(clickedItem['name'] + ' clicked!')
+                    .position('top right')
+                    .hideDelay(1500)
+            );
+        });
     }
 
 }
