@@ -37,6 +37,10 @@ function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet, $mdDi
     vm.roFruitNames = ['Apple', 'Mango', 'Orange'];
     vm.isChipsReadonly = false;
 
+    /* Fab toolbar */
+    vm.fabSelectedMode = 'md-fling';
+    vm.isFabOpen = true;
+
     function showSimpleToast() {
         $mdToast.show(
             $mdToast.simple()

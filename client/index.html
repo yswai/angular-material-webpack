@@ -72,14 +72,36 @@
                 Readonly: {{ vm.isChipsReadonly }}
             </md-checkbox>
         </div>
-        <div flex layout="row">
-            <div flex="30">
-                <h4>Standard date-picker</h4>
-                <md-datepicker ng-model="vm.myDate" md-placeholder="Enter date"></md-datepicker>
+        <div flex>
+            <div class="lock-size" layout="row" layout-align="left center">
+                <md-fab-speed-dial ng-mouseenter="vm.isFabOpen = true" ng-mouseleave="vm.isFabOpen = false"
+                                   md-open="vm.isFabOpen" md-direction="right" ng-class="vm.fabSelectedMode">
+                    <md-fab-trigger>
+                        <md-button aria-label="menu" class="md-fab md-warn">
+                            <md-icon>menu</md-icon>
+                        </md-button>
+                    </md-fab-trigger>
+                    <md-fab-actions>
+                        <md-button aria-label="Done" class="md-fab md-raised md-mini">
+                            <md-icon>done</md-icon>
+                        </md-button>
+                        <md-button aria-label="Done all" class="md-fab md-raised md-mini">
+                            <md-icon>done_all</md-icon>
+                        </md-button>
+                    </md-fab-actions>
+                </md-fab-speed-dial>
             </div>
-            <div flex="30">
-                <h4>Standard date-picker 2</h4>
-                <md-datepicker ng-model="vm.myDate2" md-placeholder="Enter date"></md-datepicker>
+        </div>
+        <div flex>
+            <div layout="row">
+                <div flex="30">
+                    <h4>Standard date-picker</h4>
+                    <md-datepicker ng-model="vm.myDate" md-placeholder="Enter date"></md-datepicker>
+                </div>
+                <div flex="30">
+                    <h4>Standard date-picker 2</h4>
+                    <md-datepicker ng-model="vm.myDate2" md-placeholder="Enter date"></md-datepicker>
+                </div>
             </div>
         </div>
     </div>
