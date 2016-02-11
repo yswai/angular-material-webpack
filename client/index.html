@@ -59,6 +59,19 @@
                 Tab Dialog
             </md-button>
         </div>
+        <div flex>
+            <md-chips ng-model="vm.roFruitNames" readonly="vm.isChipsReadonly">
+                <md-chip-template>
+                    <strong>{{$chip}}</strong>
+                    <em>(fruit)</em>
+                </md-chip-template>
+            </md-chips>
+        </div>
+        <div flex>
+            <md-checkbox class="chips-cb" ng-model="vm.isChipsReadonly" aria-label="Readonly">
+                Readonly: {{ vm.isChipsReadonly }}
+            </md-checkbox>
+        </div>
         <div flex layout="row">
             <div flex="30">
                 <h4>Standard date-picker</h4>

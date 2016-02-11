@@ -33,6 +33,10 @@ function MaterialAngularCtrl($mdToast, $log, $q, $timeout, $mdBottomSheet, $mdDi
     /* Dialog */
     vm.showTabDialog = showTabDialog;
 
+    /* Chips */
+    vm.roFruitNames = ['Apple', 'Mango', 'Orange'];
+    vm.isChipsReadonly = false;
+
     function showSimpleToast() {
         $mdToast.show(
             $mdToast.simple()
